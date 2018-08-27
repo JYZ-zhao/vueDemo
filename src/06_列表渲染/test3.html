@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+<div id=demo>
+    <ul>
+        <li v-for="(p,index) in persons" :key="index">
+            {{index}}name--{{p.name}}:age--{{p.age}}--
+            <button @click="deleteP(index)">删除</button>
+            <button @click="updateP(index,{name : 'zjy' , age : 22})">更新</button>
+            <button @click="addP({name:'zzzzz',age:9999})">增加</button>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#demo',
+
+        data: {
+            persons: [
+                {name: 'zz', age: '1'},
+
+                {name: 'jj', age: '2'},
+
+                {name: 'yy', age: '3'},
+
+                {name: 'zy', age: '4'},
+
+            ]
+        },
+        methods: {
+            deleteP(index) {
+                this.persons.splice(index, 1)
+            },
+            updateP(index, newp) {
+                this.persons.splice(index, 1, newp)
+            },
+            addP(newp) {
+                this.persons.push(newp)
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>
