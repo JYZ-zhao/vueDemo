@@ -27,14 +27,18 @@
   <button @click="test2('abc')">test2</button>
   <button @click="test3('abcd', $event)">test3</button>
 
-  <h2>2. 事件修饰符</h2>
+  <h2>2. 事件修饰符</h2><!--事件冒泡 -->
+
+
   <a href="http://www.baidu.com" @click.prevent="test4">百度一下</a>
+      <!--@click.prevent  阻止事件默认行为 -->
   <div style="width: 200px;height: 200px;background: #a4ff7f" @click="test5">
-    <div style="width: 100px;height: 100px;background: #ff6acc" @click.stop="test6"></div>
+      <!--===========================================================================================================-->
+    <div style="width: 100px;height: 100px;background: #ff6acc" @click.stop="test6"></div><!--@click.stop 阻止事件冒泡-->
   </div>
 
   <h2>3. 按键修饰符</h2>
-  <input type="text" @keyup.13="test7">
+  <input type="text" @keyup.13="test7"><!--  keyup按键抬起来时调用-->
   <input type="text" @keyup.enter="test7">
 
 </div>
@@ -69,8 +73,9 @@
       },
 
       test7 (event) {
+          //enter的keycode为13
         console.log(event.keyCode)
-        alert(event.target.value)
+        alert(event.target.value+event.keyCode)
       }
     }
   })

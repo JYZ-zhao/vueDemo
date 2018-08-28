@@ -51,6 +51,8 @@
     mounted () {
       console.log('mounted()')
       // 执行异步任务
+
+        //=>匿名函数的简写语法糖
       this.intervalId = setInterval(() => {
         console.log('-----')
         this.isShow = !this.isShow

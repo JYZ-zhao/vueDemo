@@ -29,7 +29,7 @@
     new Vue({
         el: '#demo',
         data: {
-            searchName: '',
+            searchName: '',//过滤条件 初始为空  根据过滤条件和persons产生新的过滤后的值
             orderType: 0, // 0代表不排序, 1代表降序, 2代表升序
             persons: [
                 {name: 'Tom', age: 18},
@@ -46,19 +46,23 @@
         },
 
         computed: {
+
+            //计算属性
             filterPersons() {
                 // debugger
                 // 取出相关数据
                 // 声明常量
                 const {searchName, persons, persons1, orderType} = this
 
-                //函数调用时使用数组填充参数列表
+                //...函数调用时使用数组填充参数列表
+
                 let arr = [...persons, ...persons1]
-                // 过滤数组
+
+                // 过滤数组 判断输入的值是否被包含  找是下标出现位置  等于-1说明没有包含  起到过滤的作用
                     arr = persons.filter(p => p.name.indexOf(searchName) !== -1)
                 // 排序
                 if (orderType!=0) {
-                    arr.sort(function (p1, p2) {
+                    arr.sort(function (p1, p2) { //如果返回的是负数，p1前
                         if (orderType === 1) { // 降序
                             return p2.age - p1.age
                         } else { // 升序

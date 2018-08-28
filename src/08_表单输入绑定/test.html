@@ -13,6 +13,8 @@
   select
 -->
 <div id="demo">
+
+    <!--@submit.prevent="handleSubmit"  阻止submit  使用handleSubmit来提交form-->
   <form action="/xxx" @submit.prevent="handleSubmit">
     <span>用户名: </span>
     <input type="text" v-model="username"><br>
@@ -57,9 +59,10 @@
       likes: ['foot'],
       allCitys: [{id: 1, name: 'BJ'}, {id: 2, name: 'SS'}, {id: 3, name: 'SZ'}],
       cityId: '2',
-      info: ''
+      info: '介绍'
     },
     methods: {
+        //提交表单   ajax请求提交
       handleSubmit () {
         console.log(this.username, this.pwd, this.sex, this.likes, this.cityId, this.info)
         alert('提交注册的ajax请求')

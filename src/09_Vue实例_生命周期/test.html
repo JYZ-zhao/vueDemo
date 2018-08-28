@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>09_Vue实例_生命周期</title>
+    <meta charset="UTF-8">
+    <title>09_Vue实例_生命周期</title>
+    <style>
+        .classA {
+            color: #69ddff;
+        }
+        .classB {
+            background: #c1ff64;
+        }
+        .classC {
+            font-size: 20px;
+        }
+    </style>
+
+    <style>
+        .classD {
+            color: #8421ff;
+        }
+
+    </style>
 </head>
 <body>
 <!--
@@ -24,38 +42,48 @@
 -->
 
 <div id="test">
-  <button @click="destroyVue">destory vue</button>
-  <p v-if="isShow">尚硅谷IT教育</p>
+    <button @click="destroyVue">destory vue</button>
+    <p v-if="isShow">尚硅谷IT教育</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-  new Vue({
-    el: '#test',
-    data: {
-      isShow: true
-    },
+    new Vue({
+        el: '#test',
+        data: {
+            isShow: true
 
-    mounted () {
-      // 执行异步任务
-      this.intervalId = setInterval(() => {
-        console.log('-----')
-        this.isShow = !this.isShow
-      }, 1000)
-    },
+        },
 
-    beforeDestroy() {
-      console.log('beforeDestroy()')
-      // 执行收尾的工作
-      clearInterval(this.intervalId)
-    },
+        mounted() {//初始化显示之后，立即调用
+            // 执行异步任务
+            //setInterval()方法可以按照指定的周期(以毫秒计时)来掉用函数或表达式
+            this.intervalId = setInterval(
+                //回调函数，用=>箭头函数 匿名函数内部没有this 使用箭头函数 在箭头函数引用了this、arguments或者参数之外的变量，
+                // 那它们一定不是箭头函数本身包含的，而是从父级作用域继承的
 
-    methods: {
-      destroyVue () {
-        this.$destroy()
-      }
-    }
-  })
+                //回调函数作为参数
+                () => {
+                    console.log('-----')
+                    this.isShow = !this.isShow
+                }
+                //时间作为第二个参数
+                , 1)
+        },
+
+        beforeDestroy() {
+            console.log('beforeDestroy()')
+            // 执行收尾的工作
+            //结束定时器的循环调用函数，除非调用clearInterval()方法，否则无限循环
+            clearInterval(this.intervalId)
+        },
+
+        methods: {
+            destroyVue() {
+                this.$destroy()
+            }
+        }
+    })
 
 
 </script>
