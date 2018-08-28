@@ -5,11 +5,13 @@
     <title>09_Vue实例_生命周期</title>
     <style>
         .classA {
-            color: #69ddff;
+            color: #ff907a;
         }
+
         .classB {
-            background: #c1ff64;
+            color: #0ce5ff;
         }
+
         .classC {
             font-size: 20px;
         }
@@ -43,7 +45,7 @@
 
 <div id="test">
     <button @click="destroyVue">destory vue</button>
-    <p v-if="isShow">尚硅谷IT教育</p>
+    <p v-if="isShow" :class="myclass">尚硅谷IT教育</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
@@ -51,9 +53,18 @@
     new Vue({
         el: '#test',
         data: {
-            isShow: true
+            isShow: true,
+            myclass: 'classA',
+            class1: true
 
         },
+
+        /*
+        * 常用生命周期方法mounted() 发送ajax请求，启动定时器等异步任务
+        *
+        * beforeDestory() 做收尾工作，如：清楚定时器
+        *
+        * */
 
         mounted() {//初始化显示之后，立即调用
             // 执行异步任务
@@ -64,8 +75,19 @@
 
                 //回调函数作为参数
                 () => {
-                    console.log('-----')
+                    console.log('开始-----')
                     this.isShow = !this.isShow
+                    console.log(this.isShow)
+                    if (this.isShow) {
+                        console.log('AAAA')
+                        if (this.isShow&&this.class1) {
+                            this.myclass = 'classB'
+                        }
+                        this.class1 = !this.class1
+                    } else {
+                        console.log('BBBB')
+                        this.myclass = 'classA'
+                    }
                 }
                 //时间作为第二个参数
                 , 1)
